@@ -8,24 +8,18 @@
 -->
 <template>
   <div class="content">
-    <menuInfo/>
+    <el-header><topInfo /></el-header>
   </div>
   <!-- <router-view /> -->
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
-import menuInfo from './components/basic/menu/index.vue'
+import { defineComponent } from "vue";
+import topInfo from "./components/basic/top/index.vue";
 
 export default defineComponent({
-  components:{menuInfo},
-  setup() {
-    
-  },
-})
+  components: { topInfo },
+  setup() {},
+});
 </script>
 
-
-
-
-<style lang="less">
-</style>
+<style lang="less"></style>
