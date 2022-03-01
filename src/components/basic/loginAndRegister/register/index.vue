@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-01 13:10:40
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-01 17:05:34
+ * @LastEditTime: 2022-03-01 17:06:50
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\register\index.vue
 -->
@@ -73,18 +73,12 @@
         />
       </el-form-item>
     </el-form>
-    <!-- <comLoginAndRegister>
-    <template #agreement> -->
     <p class="agreement fs-12">
       注册即表示同意<span>《用户协议》《隐私政策》</span>
     </p>
-    <!-- </template>
-    <template #btn> -->
     <div class="dialog-footer mt-4">
       <el-button class="login" type="primary" plain>注册</el-button>
     </div>
-    <!-- </template>
-  </comLoginAndRegister> -->
   </div>
 </template>
 
