@@ -1,3 +1,11 @@
+<!--
+ * @Author: ZhouCong
+ * @Date: 2022-02-28 09:45:23
+ * @LastEditors: ZhouCong
+ * @LastEditTime: 2022-03-01 13:17:19
+ * @Description: file content
+ * @FilePath: \find-project\src\components\basic\top\index.vue
+-->
 <template>
   <div class="top d-flex jc-sb ai-c">
     <!-- 菜单 -->
@@ -17,9 +25,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import menuInfo from "@/components/basic/menu/index.vue";
-import personalInfo from "@/components/basic/personalInfo/index.vue";
-import search from "@/components/basic/search/index.vue";
+import menuInfo from "@/components/basic/top/menu/index.vue";
+import personalInfo from "@/components/basic/top/personalInfo/index.vue";
+import search from "@/components/basic/top/search/index.vue";
 
 export default defineComponent({
   components: { menuInfo, personalInfo, search },

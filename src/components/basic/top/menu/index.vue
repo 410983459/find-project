@@ -2,9 +2,9 @@
  * @Author: ZhouCong
  * @Date: 2022-02-24 13:56:03
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-02-25 16:37:06
+ * @LastEditTime: 2022-03-01 13:20:23
  * @Description: file content
- * @FilePath: \find-project\src\components\basic\menu\index.vue
+ * @FilePath: \find-project\src\components\basic\top\menu\index.vue
 -->
 <template>
   <el-menu
@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { menuList } from "../pageConfig";
+import { menuList } from "../../pageConfig";
 import { MenuItem } from "@/interface/basic";
 
 export default defineComponent({

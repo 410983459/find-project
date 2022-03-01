@@ -2,22 +2,12 @@
  * @Author: ZhouCong
  * @Date: 2022-02-28 11:38:09
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-01 10:11:54
+ * @LastEditTime: 2022-03-01 16:56:04
  * @Description: file content
- * @FilePath: \find-project\src\components\basic\login\login.vue
+ * @FilePath: \find-project\src\components\basic\loginAndRegister\login\login.vue
 -->
 <template>
-  <!-- <el-button type="text" @click="dialogFormVisible = true"
-    >open a Form nested Dialog</el-button
-  > -->
-
-  <el-dialog
-    v-model="dialogFormVisible"
-    title="登录"
-    center
-    width="400px"
-    @close="close(false)"
-  >
+  <div class="login">
     <el-form :model="form" align="center">
       <el-form-item>
         <el-input
@@ -42,71 +32,73 @@
         >
           <template #prefix>
             <el-icon class="el-input__icon">
-              <lock />
+              <key />
             </el-icon>
           </template>
         </el-input>
       </el-form-item>
+      <el-form-item class="verify">
+        <el-input
+          v-model="form.password"
+          placeholder="验证码"
+          autocomplete="off"
+          type="password"
+          show-password
+        >
+          <template #prefix>
+            <el-icon class="el-input__icon">
+              <lock />
+            </el-icon>
+          </template>
+        </el-input>
+        <img
+          class="verifyCode"
+          src="../../../../assets/images/yzm.png"
+          alt=""
+        />
+      </el-form-item>
     </el-form>
 
-    <p class="agreement fs-12">
-      登录即表示同意<span>《用户协议》《隐私政策》</span>
-    </p>
-    <el-divider
-      style="margin: 15px 0; border-top: 1px solid #f7f7f7"
-    ></el-divider>
+    <!-- <comLoginAndRegister>
+    <template #imgIcon> -->
     <div class="img-box d-flex jc-sa">
       <img v-for="item in iconImgList" :key="item.key" :src="item.url" alt="" />
     </div>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button
-          class="login"
-          type="primary"
-          @click="dialogFormVisible = false"
-          >登录</el-button
-        >
-      </span>
-    </template>
-  </el-dialog>
+    <!-- </template>
+    <template #btn> -->
+    <div class="dialog-footer mt-4">
+      <el-button class="login" type="primary">登录</el-button>
+    </div>
+    <!-- </template>
+  </comLoginAndRegister> -->
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, inject } from "vue";
-import { Avatar, Lock } from "@element-plus/icons-vue";
+import { defineComponent, reactive } from "vue";
 import { IconItem } from "@/interface/basic";
-import { iconList } from "../pageConfig";
+import { iconList } from "../../pageConfig";
+import { Avatar, Lock, Key } from "@element-plus/icons-vue";
 
 export default defineComponent({
-  components: { Avatar, Lock },
+  components: { Avatar, Lock, Key },
   setup() {
-    const dialogFormVisible = ref(true);
-
+    const iconImgList: IconItem[] = iconList;
     const form = reactive({
       account: "",
       password: "",
     });
-    const iconImgList: IconItem[] = iconList;
-    const close = (val: boolean) => {
-      dialogFormVisible.value = true;
-      (inject("handleLogin") as any)(val);
-    };
     return {
-      dialogFormVisible,
       form,
       iconImgList,
-      close,
     };
   },
 });
 </script>
 
 <style scoped lang='less'>
-.agreement {
-  span {
-    color: #409eff;
-    cursor: pointer;
-  }
+.dialog-footer button.login {
+  width: 100%;
 }
 .img-box {
   padding: 0 70px;
@@ -116,7 +108,15 @@ export default defineComponent({
     height: 26px;
   }
 }
-.dialog-footer button.login {
-  width: 100%;
+.verify {
+  /deep/.el-form-item__content {
+    .el-input {
+      width: auto;
+    }
+  }
+  .verifyCode {
+    width: 108px;
+    height: 30px;
+  }
 }
 </style>

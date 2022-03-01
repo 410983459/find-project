@@ -31,6 +31,12 @@
   .pa-2 {
     padding: 10px;
   }
+  .px-2{
+    padding: 10px 0;
+  }
+  .py-2{
+    padding: 0 10px;
+  }
   .pt-2 {
     padding-top: 10px;
   }
@@ -43,6 +49,28 @@
   .pb-2 {
     padding-bottom: 10px;
   }
+  .pa-4 {
+    padding: 20px;
+  }
+  .px-4{
+    padding: 20px 0;
+  }
+  .py-4{
+    padding: 0 20px;
+  }
+  .pt-4 {
+    padding-top: 20px;
+  }
+  .pr-4 {
+    padding-right: 20px;
+  }
+  .pl-4 {
+    padding-left: 20px;
+  }
+  .pb-4 {
+    padding-bottom: 20px;
+  }
+
   .ma-0 {
     margin: 0;
   }
@@ -57,5 +85,17 @@
   }
   .mb-2 {
     margin-bottom: 10px;
+  }
+  .mt-4 {
+    margin-top: 20px;
+  }
+  .mr-4 {
+    margin-right: 20px;
+  }
+  .ml-4 {
+    margin-left: 20px;
+  }
+  .mb-4 {
+    margin-bottom: 20px;
   }
   
