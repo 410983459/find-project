@@ -2,13 +2,13 @@
  * @Author: ZhouCong
  * @Date: 2022-03-01 17:59:04
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-01 18:11:08
+ * @LastEditTime: 2022-03-02 16:32:26
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\sideNav\index.vue
 -->
 <template>
-  <el-row class="tac mt-4">
-    <el-col :span="4">
+  <el-row class="tac">
+    <el-col :span="24">
       <el-card class="box-card">
         <el-menu
           default-active="2"
@@ -20,7 +20,7 @@
             <el-icon><icon-menu /></el-icon>
             <span>Navigator Two</span>
           </el-menu-item>
-          <el-menu-item index="3" disabled>
+          <el-menu-item index="3">
             <el-icon><document /></el-icon>
             <span>Navigator Three</span>
           </el-menu-item>
@@ -28,11 +28,11 @@
             <el-icon><setting /></el-icon>
             <span>Navigator Four</span>
           </el-menu-item>
-          <el-menu-item index="4">
+          <el-menu-item index="5">
             <el-icon><setting /></el-icon>
             <span>Navigator Four</span>
           </el-menu-item>
-          <el-menu-item index="4">
+          <el-menu-item index="6">
             <el-icon><setting /></el-icon>
             <span>Navigator Four</span>
           </el-menu-item>
@@ -68,3 +68,13 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="less" scoped>
+.tac {
+  .el-menu {
+    border-right: none;
+    li{
+        padding-left: 0 !important;
+    }
+  }
+}
+</style>
