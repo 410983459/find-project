@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-02 11:13:54
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-03 10:03:39
+ * @LastEditTime: 2022-03-03 15:29:56
  * @Description: file content
  * @FilePath: \find-project\src\views\home\index.vue
 -->
@@ -14,26 +14,17 @@
       <!-- 文章列表 -->
       <router-view />
     </div>
-    <!-- 登录 -->
-    <login v-if="isShowLogin" />
   </div>
   <!-- <router-view /> -->
 </template>
 <script lang="ts">
-import { defineComponent, ref, provide } from "vue";
-import login from "@/components/basic/loginAndRegister/index.vue";
+import { defineComponent } from "vue";
 import sideNav from "@/components/basic/sideNav/index.vue";
 
 export default defineComponent({
-  components: { login, sideNav },
+  components: { sideNav },
   setup() {
-    let isShowLogin = ref(false);
-    provide("handleLogin", (val: boolean) => {
-      isShowLogin.value = val;
-    });
-    return {
-      isShowLogin,
-    };
+    return {};
   },
 });
 </script>

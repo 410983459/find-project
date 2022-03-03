@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/home/index.vue'
-// 不同类型的文章相关路由
-import { articleCategories } from './articleCategories'
+import Home from '../views/home/home.vue'
+import create from '@/views/create/index.vue'
+// 首页
+import { homePage } from './home'
 // 一角
 import { corner } from './corner'
 // 新闻
@@ -15,19 +16,24 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Home,
-    redirect: '/comprehensive',
+    redirect: '/home',
     children: [
-      ...articleCategories
+      ...homePage,
+      ...corner,
+      ...news,
+      ...course
     ]
+  },
+  {
+    path: '/create',
+    name: 'create',
+    component: create
   },
   {
     path: '/notFound',
     name: 'notFound',
     component: () => import('@/views/notFound/index.vue')
   },
-  ...corner,
-  ...news,
-  ...course
 ]
 
 const router = createRouter({
