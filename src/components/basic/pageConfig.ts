@@ -2,11 +2,11 @@
  * @Author: ZhouCong
  * @Date: 2022-02-28 09:45:23
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-03 10:36:09
+ * @LastEditTime: 2022-03-03 11:58:33
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\pageConfig.ts
  */
-import { MenuItem, IconItem } from "@/interface/basic";
+import { MenuItem, IconItem, InfoDropdownitem } from "@/interface/basic";
 export const menuList: MenuItem[] = [
   {
     label: "首页",
@@ -50,5 +50,23 @@ export const iconList: IconItem[] = [
     label: "wb",
     key: "wb",
     url: require('@/assets/images/wb.png')
+  },
+]
+export const infoDropdownitem: InfoDropdownitem[] = [
+  {
+    label: "写文章",
+    key: "write",
+  },
+  {
+    label: "我的主页",
+    key: "myPage",
+  },
+  {
+    label: "设置",
+    key: "setting",
+  },
+  {
+    label: "退出",
+    key: "exit",
   },
 ]
