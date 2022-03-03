@@ -2,14 +2,12 @@
  * @Author: ZhouCong
  * @Date: 2022-03-02 11:13:54
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-02 16:35:22
+ * @LastEditTime: 2022-03-03 10:03:39
  * @Description: file content
  * @FilePath: \find-project\src\views\home\index.vue
 -->
 <template>
   <div class="container">
-    <!-- 头部导航 -->
-    <el-header><topInfo /></el-header>
     <div class="content d-flex">
       <!-- 侧边导航 -->
       <sideNav />
@@ -23,12 +21,11 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, provide } from "vue";
-import topInfo from "@/components/basic/top/index.vue";
 import login from "@/components/basic/loginAndRegister/index.vue";
 import sideNav from "@/components/basic/sideNav/index.vue";
 
 export default defineComponent({
-  components: { topInfo, login, sideNav },
+  components: { login, sideNav },
   setup() {
     let isShowLogin = ref(false);
     provide("handleLogin", (val: boolean) => {
