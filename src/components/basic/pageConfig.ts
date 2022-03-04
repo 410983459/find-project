@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-02-28 09:45:23
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-03 11:58:33
+ * @LastEditTime: 2022-03-04 11:31:30
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\pageConfig.ts
  */
@@ -55,7 +55,7 @@ export const iconList: IconItem[] = [
 export const infoDropdownitem: InfoDropdownitem[] = [
   {
     label: "写文章",
-    key: "write",
+    key: "create",
   },
   {
     label: "我的主页",
