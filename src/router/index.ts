@@ -9,6 +9,8 @@ import { corner } from './corner'
 import { news } from './news'
 // 课程
 import { course } from './course'
+// 个人中心
+import { myPage } from './myPage'
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -21,7 +23,8 @@ const routes: Array<RouteRecordRaw> = [
       ...homePage,
       ...corner,
       ...news,
-      ...course
+      ...course,
+      ...myPage
     ]
   },
   {

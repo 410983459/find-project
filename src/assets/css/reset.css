@@ -154,6 +154,11 @@ a:hover img {
 
 
 
+/* 自定义类名 */
+.mainBox {
+  width: 1100px;
+  margin: 0 auto;
+}
 
 .fs-12 {
   font-size: 12px;
@@ -189,7 +194,7 @@ a:hover img {
 
 .d-flex {
   display: flex;
-} 
+}
 
 .jc-c {
   justify-content: center;
@@ -309,4 +314,12 @@ a:hover img {
 
 .mb-4 {
   margin-bottom: 20px;
+}
+
+.c-ccc {
+  color: #ccc;
+}
+
+.c-999 {
+  color: #999;
 }
