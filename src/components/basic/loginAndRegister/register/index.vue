@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-01 13:10:40
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-01 17:06:50
+ * @LastEditTime: 2022-03-04 10:09:27
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\register\index.vue
 -->
@@ -17,7 +17,7 @@
         >
           <template #prefix>
             <el-icon class="el-input__icon">
-              <Avatar />
+              <User />
             </el-icon>
           </template>
         </el-input>
@@ -84,10 +84,10 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { Avatar, Lock, Key, Link } from "@element-plus/icons-vue";
+import { User, Lock, Key, Link } from "@element-plus/icons-vue";
 
 export default defineComponent({
-  components: { Avatar, Lock, Key, Link },
+  components: { User, Lock, Key, Link },
   setup() {
     const form = reactive({
       account: "",

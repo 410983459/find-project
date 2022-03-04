@@ -2,9 +2,9 @@
  * @Author: ZhouCong
  * @Date: 2022-03-02 11:23:54
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-03 09:46:41
+ * @LastEditTime: 2022-03-04 10:15:39
  * @Description: file content
- * @FilePath: \find-project\src\components\basic\articleList\index.vue
+ * @FilePath: \find-project\src\components\article\articleItem.vue
 -->
 <template>
   <el-row>
