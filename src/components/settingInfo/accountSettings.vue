@@ -2,8 +2,8 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 16:55:42
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-28 17:09:29
- * @Description: file content
+ * @LastEditTime: 2022-03-28 17:35:47
+ * @Description: 账号设置
  * @FilePath: \find-project\src\components\settingInfo\accountSettings.vue
 -->
 <template>

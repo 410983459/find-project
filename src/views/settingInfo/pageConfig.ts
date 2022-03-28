@@ -2,11 +2,11 @@
  * @Author: ZhouCong
  * @Date: 2022-03-28 16:28:33
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-28 17:02:51
+ * @LastEditTime: 2022-03-28 19:42:46
  * @Description: file content
  * @FilePath: \find-project\src\views\settingInfo\pageConfig.ts
  */
-import { ListInfo } from '@/interface/basic'
+import { ListInfo, PersonalInfo } from '@/interface/basic'
 export const listInfo: ListInfo[] = [
     {
         label: '账号_ID',
@@ -51,5 +51,32 @@ export const listInfo: ListInfo[] = [
         subtitle: '账号变更',
         operate: '关闭账户',
         init: '系统将会删除个人资料、解绑手机号以及关联账号'
+    },
+]
+export const personalInfo: PersonalInfo[] = [
+    {
+        label: '昵称',
+        key: 'nickname',
+    },
+    {
+        label: '位置',
+        key: 'address',
+    },
+    {
+        label: '公司',
+        key: 'company',
+    },
+    {
+        label: '学校',
+        key: 'school',
+    },
+    {
+        label: '个人网站',
+        key: 'personalWeb',
+    },
+    {
+        label: '个人简介',
+        key: 'personalIntroduction',
+        limit:100
     },
 ]

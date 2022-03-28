@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 16:55:42
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-28 16:23:51
+ * @LastEditTime: 2022-03-28 17:16:41
  * @Description: file content
  * @FilePath: \find-project\src\components\settingInfo\settingInfoFrom.vue
 -->
@@ -19,30 +19,7 @@
             <accountSettings></accountSettings>
           </el-tab-pane>
           <el-tab-pane label="个人资料" name="second">
-            <el-form
-              :inline="true"
-              :model="formInline"
-              class="demo-form-inline"
-            >
-              <el-form-item label="Approved by">
-                <el-input
-                  v-model="formInline.user"
-                  placeholder="Approved by"
-                ></el-input>
-              </el-form-item>
-              <el-form-item label="Activity zone">
-                <el-select
-                  v-model="formInline.region"
-                  placeholder="Activity zone"
-                >
-                  <el-option label="Zone one" value="shanghai"></el-option>
-                  <el-option label="Zone two" value="beijing"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" @click="onSubmit">Query</el-button>
-              </el-form-item>
-            </el-form>
+            <personalInfo></personalInfo>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -52,17 +29,13 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import accountSettings from "./accountSettings.vue";
+import personalInfo from "./personalInfo.vue";
 
 export default defineComponent({
-  components: { accountSettings },
+  components: { accountSettings, personalInfo },
   setup() {
     const state = reactive({
-      activeName: "first",
-      formInline: {
-        user: "",
-        region: "",
-        activeName: "first",
-      },
+      activeName: "second",
     });
     const onSubmit = () => {
       console.log("submit!");
