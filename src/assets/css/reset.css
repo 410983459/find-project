@@ -323,3 +323,7 @@ a:hover img {
 .c-999 {
   color: #999;
 }
+
+.cp {
+  cursor: pointer;
+}

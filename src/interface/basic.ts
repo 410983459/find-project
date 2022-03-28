@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-02-28 09:45:23
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-03 11:54:32
+ * @LastEditTime: 2022-03-28 17:01:44
  * @Description: file content
  * @FilePath: \find-project\src\interface\basic.ts
  */
@@ -17,4 +17,9 @@ export interface IconItem extends MenuItem {
 //   icon: String
 // }
 
-export type InfoDropdownitem = MenuItem 
+export type InfoDropdownitem = MenuItem
+export interface ListInfo extends MenuItem {
+  subtitle?: String,
+  operate:String
+  init?:String
+}
