@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-28 17:12:34
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-28 20:27:53
+ * @LastEditTime: 2022-03-29 17:13:26
  * @Description: 个人设置
  * @FilePath: \find-project\src\components\settingInfo\personalInfo.vue
 -->
@@ -34,7 +34,9 @@
       </el-form-item>
     </el-form>
     <div class="btn ta-c mt-4">
-      <el-button type="primary" style="width:100px" @click="onSubmit">保存</el-button>
+      <el-button type="primary" style="width: 100px" @click="onSubmit"
+        >保存</el-button
+      >
     </div>
   </div>
 </template>
@@ -55,7 +57,7 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="less">
+<style lang="scss">
 .personalInfo {
   .personalInfoFrom {
     flex-wrap: wrap;

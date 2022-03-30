@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-02-25 17:48:38
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-03 17:52:17
+ * @LastEditTime: 2022-03-29 20:33:03
  * @Description: file content
  * @FilePath: \find-project\src\shims-vue.d.ts
  */
@@ -12,6 +12,7 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+declare module "*.js"
 declare module 'prismjs'
 declare module '@kangc/v-md-editor'
 declare module '@kangc/v-md-editor/lib/preview'
