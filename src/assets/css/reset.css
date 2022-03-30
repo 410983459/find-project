@@ -127,6 +127,9 @@ a:hover img {
   border: none;
 }
 
+body{
+  background-color: #f9f9f9;
+}
 
 /*清除浮动*/
 .clearfix:after {

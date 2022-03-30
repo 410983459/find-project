@@ -1,0 +1,12 @@
+.el-card.is-always-shadow {
+    box-shadow: none;
+    border: none;
+}
+
+.el-header {
+    background-color: #fff;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
