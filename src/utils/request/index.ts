@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-02-24 16:36:11
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-02-25 13:29:11
+ * @LastEditTime: 2022-04-13 18:13:11
  * @Description: file content
  * @FilePath: \find-project\src\utils\request\index.ts
  */
@@ -11,7 +11,7 @@ import { getToken, setToken, getTokenKey, removeToken } from '@/utils/request/to
 import { ElMessage } from 'element-plus'
 
 const http = axios.create({
-    baseURL: process.env.VITE_BASE_API,
+    baseURL: process.env.VUE_APP_URL,
     timeout: 10000 // request timeout
 })
 
@@ -31,11 +31,11 @@ http.interceptors.request.use(
 // 响应拦截器
 http.interceptors.response.use(
     (response) => {
-        const res = response.data;
-        if (res.code === 200) {
-            return res;
+        // const res = response.data;
+        if (response.status === 200) {
+            return response;
         } else {
-            ElMessage.error(res.msg)
+            ElMessage.error(response.data.msg)
             return;
         }
     },

@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-02-28 09:45:23
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-30 10:04:33
+ * @LastEditTime: 2022-03-30 16:04:51
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\top\personalInfo\index.vue
 -->
@@ -26,9 +26,9 @@
       <el-icon><edit-pen /></el-icon>创作
     </el-button>
     <!-- 登录状态(展示头像和下拉状态) -->
-    <avatar></avatar>
+    <!-- <avatar></avatar> -->
     <!-- 未登录状态 -->
-    <el-button v-show="false" type="primary" plain @click="login(true)"
+    <el-button type="primary" plain @click="login(true)"
       >登录/注册</el-button
     >
   </div>
@@ -68,6 +68,7 @@ export default defineComponent({
     const toCreate = () => {
       router.push("/create");
     };
+    // 切换主题色
     const changeTheme = (type: keyof typeof themes) => {
       console.log(type);
       // 根据不同的主题类型 获取不同主题数据

@@ -2,14 +2,14 @@
  * @Author: ZhouCong
  * @Date: 2022-03-01 13:10:40
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-04 10:09:27
+ * @LastEditTime: 2022-04-13 18:58:42
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\register\index.vue
 -->
 <template>
   <div class="register">
-    <el-form :model="form" align="center">
-      <el-form-item>
+    <el-form :model="form" :rules="rules" align="center">
+      <el-form-item prop="account">
         <el-input
           placeholder="用户名"
           v-model="form.account"
@@ -22,7 +22,7 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
         <el-input
           v-model="form.password"
           placeholder="密码"
@@ -37,28 +37,12 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item>
-        <el-input
-          v-model="form.password"
-          placeholder="确认密码"
-          autocomplete="off"
-          type="password"
-          show-password
-        >
-          <template #prefix>
-            <el-icon class="el-input__icon">
-              <Link />
-            </el-icon>
-          </template>
-        </el-input>
-      </el-form-item>
       <el-form-item class="verify">
         <el-input
-          v-model="form.password"
+          v-model="form.verifyCode"
           placeholder="验证码"
           autocomplete="off"
-          type="password"
-          show-password
+          @blur="checkVerifyCode"
         >
           <template #prefix>
             <el-icon class="el-input__icon">
@@ -67,9 +51,12 @@
           </template>
         </el-input>
         <img
-          class="verifyCode"
-          src="../../../../assets/images/yzm.png"
+          width="160"
+          height="32"
+          @click="verifyCodeImg = `${verifyCodeImgURL}?time=${Date.now()}`"
+          :src="verifyCodeImg"
           alt=""
+          srcset=""
         />
       </el-form-item>
     </el-form>
@@ -77,24 +64,61 @@
       注册即表示同意<span>《用户协议》《隐私政策》</span>
     </p>
     <div class="dialog-footer mt-4">
-      <el-button class="login" type="primary" plain>注册</el-button>
+      <el-button class="login" type="primary" @click="register" plain
+        >注册</el-button
+      >
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, toRefs,ref, onMounted } from "vue";
 import { User, Lock, Key, Link } from "@element-plus/icons-vue";
+import { rules } from "../pageConfig";
+import { getVerifyCode, checkCode } from "@/api/loginAndRegister";
+import { verifyCodeParam } from "@/interface/loginAndRegister";
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
   components: { User, Lock, Key, Link },
   setup() {
-    const form = reactive({
-      account: "",
-      password: "",
+    let verifyCodeImgURL = ref(`${process.env.VUE_APP_URL}/captcha/CaptchaImg`);
+    let verifyCodeImg = ref(verifyCodeImgURL);
+    const state = reactive({
+      form: {
+        account: "",
+        password: "",
+        verifyCode: "",
+      },
+      rules: rules,
     });
+
+    onMounted(() => {});
+    // 校验验证码
+    const checkVerifyCode = async () => {
+      if (state.form.verifyCode) {
+        let param: verifyCodeParam = {
+          captcha: state.form.verifyCode,
+        };
+        const res = await checkCode(param);
+        console.log(res);
+        if (res.data.code === 200) {
+          console.log("验证成功");
+        } else {
+          ElMessage.error(res.data.data as string);
+        }
+      }
+    };
+    // 注册
+    const register = () => {
+      
+    };
     return {
-      form,
+      ...toRefs(state),
+      checkVerifyCode,
+      register,
+      verifyCodeImg,
+      verifyCodeImgURL
     };
   },
 });
@@ -112,13 +136,15 @@ export default defineComponent({
 }
 .verify {
   /deep/.el-form-item__content {
+    display: flex;
     .el-input {
-      width: auto;
+      width: calc(100% - 160px);
     }
   }
   .verifyCode {
-    width: 108px;
-    height: 30px;
+    display: inline-block;
+    //   width: 160px;
+    overflow: hidden;
   }
 }
 </style>
