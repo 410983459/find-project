@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-30 11:20:15
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-31 17:17:36
+ * @LastEditTime: 2022-04-13 19:10:38
  * @Description: file content
  * @FilePath: \find-project\src\interface\loginAndRegister.ts
  */
@@ -17,4 +17,8 @@ export interface Rules {
 }
 export interface verifyCodeParam{
     captcha:String
+}
+export interface Register{
+    account:String,
+    password:String
 }

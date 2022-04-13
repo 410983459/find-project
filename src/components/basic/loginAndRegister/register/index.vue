@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-01 13:10:40
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-13 18:58:42
+ * @LastEditTime: 2022-04-13 20:02:07
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\register\index.vue
 -->
@@ -42,8 +42,8 @@
           v-model="form.verifyCode"
           placeholder="验证码"
           autocomplete="off"
-          @blur="checkVerifyCode"
         >
+          <!-- @blur="checkVerifyCode" -->
           <template #prefix>
             <el-icon class="el-input__icon">
               <Lock />
@@ -53,9 +53,10 @@
         <img
           width="160"
           height="32"
+          class="cp"
           @click="verifyCodeImg = `${verifyCodeImgURL}?time=${Date.now()}`"
           :src="verifyCodeImg"
-          alt=""
+          alt="验证码"
           srcset=""
         />
       </el-form-item>
@@ -72,18 +73,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs,ref, onMounted } from "vue";
+import { defineComponent, reactive, toRefs, ref, onMounted } from "vue";
 import { User, Lock, Key, Link } from "@element-plus/icons-vue";
 import { rules } from "../pageConfig";
-import { getVerifyCode, checkCode } from "@/api/loginAndRegister";
-import { verifyCodeParam } from "@/interface/loginAndRegister";
+import { checkCode, toRegister } from "@/api/loginAndRegister";
+import { verifyCodeParam, Register } from "@/interface/loginAndRegister";
 import { ElMessage } from "element-plus";
 
 export default defineComponent({
   components: { User, Lock, Key, Link },
   setup() {
     let verifyCodeImgURL = ref(`${process.env.VUE_APP_URL}/captcha/CaptchaImg`);
-    let verifyCodeImg = ref(verifyCodeImgURL);
+    let verifyCodeImg = verifyCodeImgURL;
     const state = reactive({
       form: {
         account: "",
@@ -95,30 +96,42 @@ export default defineComponent({
 
     onMounted(() => {});
     // 校验验证码
-    const checkVerifyCode = async () => {
+    async function checkVerifyCode(): Promise<boolean> {
       if (state.form.verifyCode) {
         let param: verifyCodeParam = {
           captcha: state.form.verifyCode,
         };
         const res = await checkCode(param);
-        console.log(res);
         if (res.data.code === 200) {
-          console.log("验证成功");
+          return true;
         } else {
           ElMessage.error(res.data.data as string);
+          verifyCodeImg.value =`${verifyCodeImgURL.value}?time=${Date.now()}`;
+          return false;
         }
+      } else {
+        ElMessage.error("请输入验证码");
+        return false;
       }
-    };
+    }
     // 注册
-    const register = () => {
-      
+    const register = async () => {
+      const valid = await checkVerifyCode();
+      if (valid) {
+        let param: Register = {
+          account: state.form.account,
+          password: state.form.password,
+        };
+        const res = await toRegister(param);
+        console.log(res);
+      }
     };
     return {
       ...toRefs(state),
       checkVerifyCode,
       register,
       verifyCodeImg,
-      verifyCodeImgURL
+      verifyCodeImgURL,
     };
   },
 });
