@@ -2,18 +2,19 @@
  * @Author: ZhouCong
  * @Date: 2022-03-01 13:10:40
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-13 20:02:07
+ * @LastEditTime: 2022-04-14 17:52:38
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\register\index.vue
 -->
 <template>
   <div class="register">
-    <el-form :model="form" :rules="rules" align="center">
+    <el-form :model="form" :rules="rules" ref="registerForm" align="center">
       <el-form-item prop="account">
         <el-input
           placeholder="用户名"
           v-model="form.account"
           autocomplete="off"
+          clearable
         >
           <template #prefix>
             <el-icon class="el-input__icon">
@@ -29,6 +30,7 @@
           autocomplete="off"
           type="password"
           show-password
+          clearable
         >
           <template #prefix>
             <el-icon class="el-input__icon">
@@ -37,11 +39,12 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item class="verify">
+      <el-form-item class="verify" prop="verifyCode">
         <el-input
           v-model="form.verifyCode"
           placeholder="验证码"
           autocomplete="off"
+          clearable
         >
           <!-- @blur="checkVerifyCode" -->
           <template #prefix>
@@ -65,7 +68,11 @@
       注册即表示同意<span>《用户协议》《隐私政策》</span>
     </p>
     <div class="dialog-footer mt-4">
-      <el-button class="login" type="primary" @click="register" plain
+      <el-button
+        class="login"
+        type="primary"
+        @click="register(registerForm)"
+        plain
         >注册</el-button
       >
     </div>
@@ -73,11 +80,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, ref, onMounted } from "vue";
+import { defineComponent, reactive, toRefs, ref, onMounted, inject } from "vue";
 import { User, Lock, Key, Link } from "@element-plus/icons-vue";
 import { rules } from "../pageConfig";
-import { checkCode, toRegister } from "@/api/loginAndRegister";
-import { verifyCodeParam, Register } from "@/interface/loginAndRegister";
+import { toRegister } from "@/api/loginAndRegister";
+import { Register } from "@/interface/loginAndRegister";
+import { useCheckVerifyCode } from "@/hooks/useCheckVerifyCode";
 import { ElMessage } from "element-plus";
 
 export default defineComponent({
@@ -95,43 +103,43 @@ export default defineComponent({
     });
 
     onMounted(() => {});
-    // 校验验证码
-    async function checkVerifyCode(): Promise<boolean> {
-      if (state.form.verifyCode) {
-        let param: verifyCodeParam = {
-          captcha: state.form.verifyCode,
-        };
-        const res = await checkCode(param);
-        if (res.data.code === 200) {
-          return true;
-        } else {
-          ElMessage.error(res.data.data as string);
-          verifyCodeImg.value =`${verifyCodeImgURL.value}?time=${Date.now()}`;
-          return false;
-        }
-      } else {
-        ElMessage.error("请输入验证码");
-        return false;
-      }
-    }
+
+    const registerForm = ref<any>();
     // 注册
-    const register = async () => {
-      const valid = await checkVerifyCode();
-      if (valid) {
-        let param: Register = {
-          account: state.form.account,
-          password: state.form.password,
-        };
-        const res = await toRegister(param);
-        console.log(res);
-      }
+    const register = async (registerForm: any | undefined) => {
+      if (!registerForm) return;
+      // 表单校验
+      await registerForm.validate(async (valid: boolean) => {
+        if (!valid) return;
+        // 校验验证码
+        const validCode = await useCheckVerifyCode(state.form.verifyCode);
+        if (validCode) {
+          let param: Register = {
+            account: state.form.account,
+            password: state.form.password,
+          };
+          // 注册接口
+          const res = await toRegister(param);
+          console.log(res);
+          if (res && res.data && res.data.code == 200) {
+            ElMessage.success("注册成功,并自动登录！");
+            // 存储token
+            sessionStorage.setItem("token", res.data?.token ?? "");
+            (inject("handleLogin") as any)(false)
+          } else {
+            ElMessage.error(res.data.data as string);
+          }
+        } else {
+          verifyCodeImg.value = `${verifyCodeImgURL.value}?time=${Date.now()}`;
+        }
+      });
     };
     return {
       ...toRefs(state),
-      checkVerifyCode,
       register,
       verifyCodeImg,
       verifyCodeImgURL,
+      registerForm,
     };
   },
 });

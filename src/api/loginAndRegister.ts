@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-30 13:59:30
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-13 19:12:20
+ * @LastEditTime: 2022-04-14 17:06:45
  * @Description: file content
  * @FilePath: \find-project\src\api\loginAndRegister.ts
  */
@@ -37,7 +37,9 @@ export const toRegister = (params: Register): AxiosPromise<RegisterRes> => {
     return http.request<RegisterRes>({
         url: URLS.registerApi,
         method: 'post',
-        params: params
+        data: params 
+
+        
     });
 };
 
