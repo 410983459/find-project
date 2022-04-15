@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-01 13:10:40
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-14 17:52:38
+ * @LastEditTime: 2022-04-15 20:02:50
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\register\index.vue
 -->
@@ -101,14 +101,12 @@ export default defineComponent({
       },
       rules: rules,
     });
+    // 关闭弹窗
     const closeModel: any = inject("handleLogin");
     onMounted(() => {});
-
     const registerForm = ref<any>();
     // 注册
     const register = async (registerForm: any | undefined) => {
-      
-      closeModel(false)
       if (!registerForm) return;
       // 表单校验
       await registerForm.validate(async (valid: boolean) => {
@@ -127,6 +125,7 @@ export default defineComponent({
             ElMessage.success("注册成功,并自动登录！");
             // 存储token
             sessionStorage.setItem("token", res.data?.token ?? "");
+            closeModel(false)
           } else {
             ElMessage.error(res.data.data as string);
           }
@@ -152,7 +151,7 @@ export default defineComponent({
   width: 100%;
 }
 .agreement {
-  span {
+  span { 
     color: #409eff;
     cursor: pointer;
   }
