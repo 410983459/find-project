@@ -101,12 +101,14 @@ export default defineComponent({
       },
       rules: rules,
     });
-
+    const closeModel: any = inject("handleLogin");
     onMounted(() => {});
 
     const registerForm = ref<any>();
     // 注册
     const register = async (registerForm: any | undefined) => {
+      
+      closeModel(false)
       if (!registerForm) return;
       // 表单校验
       await registerForm.validate(async (valid: boolean) => {
@@ -125,7 +127,6 @@ export default defineComponent({
             ElMessage.success("注册成功,并自动登录！");
             // 存储token
             sessionStorage.setItem("token", res.data?.token ?? "");
-            (inject("handleLogin") as any)(false)
           } else {
             ElMessage.error(res.data.data as string);
           }
@@ -140,6 +141,7 @@ export default defineComponent({
       verifyCodeImg,
       verifyCodeImgURL,
       registerForm,
+      closeModel
     };
   },
 });
