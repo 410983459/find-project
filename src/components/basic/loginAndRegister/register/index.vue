@@ -84,7 +84,7 @@ import { defineComponent, reactive, toRefs, ref, onMounted, inject } from "vue";
 import { User, Lock, Key, Link } from "@element-plus/icons-vue";
 import { rules } from "../pageConfig";
 import { toRegister } from "@/api/loginAndRegister";
-import { Register } from "@/interface/loginAndRegister";
+import { RegisterAndLogin } from "@/interface/loginAndRegister";
 import { useCheckVerifyCode } from "@/hooks/useCheckVerifyCode";
 import { ElMessage } from "element-plus";
 
@@ -114,7 +114,7 @@ export default defineComponent({
         // 校验验证码
         const validCode = await useCheckVerifyCode(state.form.verifyCode);
         if (validCode) {
-          let param: Register = {
+          let param: RegisterAndLogin = {
             account: state.form.account,
             password: state.form.password,
           };
