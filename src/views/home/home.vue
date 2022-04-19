@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-03 15:19:25
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-19 17:37:20
+ * @LastEditTime: 2022-04-19 18:12:46
  * @Description: file content
  * @FilePath: \find-project\src\views\home\home.vue
 -->
@@ -35,6 +35,7 @@ export default defineComponent({
     // store
     let store = useStore<RootState>();
     onMounted(() => {
+      // 判断是否是登录状态
       if (!getToken()) return;
         store.dispatch(`loginInfo/${Types.SET_LOGIN_INFO}`, true);
     });

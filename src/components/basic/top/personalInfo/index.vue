@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-02-28 09:45:23
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-18 18:08:17
+ * @LastEditTime: 2022-04-19 18:16:17
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\top\personalInfo\index.vue
 -->
@@ -26,16 +26,14 @@
       <el-icon><edit-pen /></el-icon>创作
     </el-button>
     <!-- 登录状态(展示头像和下拉状态) -->
-    <avatar></avatar>
+    <avatar v-if="isLogin"></avatar>
     <!-- 未登录状态 -->
-    <el-button type="primary" plain @click="login(true)"
-      >登录/注册</el-button
-    >
+    <el-button v-else type="primary" plain @click="login(true)"> 登录/注册 </el-button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, inject, reactive } from "vue";
+import { defineComponent, toRefs, inject, reactive, computed } from "vue";
 import { EditPen, UserFilled } from "@element-plus/icons-vue";
 import { infoDropdownitem } from "../../pageConfig";
 import { InfoDropdownitem } from "@/interface/basic";
@@ -43,6 +41,8 @@ import avatar from "./avatar.vue";
 import { useRouter } from "vue-router";
 import { themes } from "@/utils/theme/themes";
 import { colorMix } from "@/utils/theme/tool.js";
+import { useStore } from "vuex";
+import { RootState } from "@/store/interface";
 
 export default defineComponent({
   components: { EditPen, avatar },
@@ -90,6 +90,9 @@ export default defineComponent({
         document.documentElement.style.setProperty(item, colorObj[item]);
       });
     };
+    // 判断是否登录
+    let store = useStore<RootState>();
+    let isLogin = computed(() => store.state.loginInfo.isLogin);
     return {
       login,
       UserFilled,
@@ -97,6 +100,7 @@ export default defineComponent({
       toCreate,
       changeTheme,
       ...toRefs(state),
+      isLogin
     };
   },
 });
