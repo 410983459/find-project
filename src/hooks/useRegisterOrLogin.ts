@@ -2,9 +2,9 @@
  * @Author: ZhouCong
  * @Date: 2022-04-14 10:24:19
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-14 11:05:11
+ * @LastEditTime: 2022-04-19 10:43:20
  * @Description: file content
- * @FilePath: \find-project\src\hooks\useCheckVerifyCode.ts
+ * @FilePath: \find-project\src\hooks\useRegisterOrLogin.ts
  */
 
 import { ElMessage } from "element-plus";

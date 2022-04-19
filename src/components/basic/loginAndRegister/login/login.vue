@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-02-28 11:38:09
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-18 18:06:38
+ * @LastEditTime: 2022-04-19 17:33:58
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\login\login.vue
 -->
@@ -81,15 +81,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs,inject } from "vue";
+import { defineComponent, reactive, ref, toRefs, inject } from "vue";
 import { IconItem } from "@/interface/basic";
 import { RegisterAndLogin } from "@/interface/loginAndRegister";
 import { iconList } from "../../pageConfig";
 import { rules } from "../pageConfig";
 import { User, Lock, Key } from "@element-plus/icons-vue";
-import { useCheckVerifyCode } from "@/hooks/useCheckVerifyCode";
+import { useCheckVerifyCode } from "@/hooks/useRegisterOrLogin";
 import { toLogin } from "@/api/loginAndRegister";
-import {ElMessage} from 'element-plus'
+import { ElMessage } from "element-plus";
+import { useStore } from "vuex";
+import { RootState } from "@/store/interface";
+import * as Types from "@/store/types";
+import { setToken } from "@/utils/request/token";
 
 export default defineComponent({
   components: { User, Lock, Key },
@@ -107,6 +111,8 @@ export default defineComponent({
     });
     // 登录
     const loginForm = ref<any>();
+    // store
+    let store = useStore<RootState>();
     // 关闭弹窗
     const closeModel: any = inject("handleLogin");
     const login = async (loginForm: any | undefined) => {
@@ -124,13 +130,14 @@ export default defineComponent({
         };
         const res = await toLogin(param);
         if (res && res.data && res.data.code == 200) {
-            ElMessage.success("登陆成功！");
-            // 存储token
-            sessionStorage.setItem("token", res.data?.token ?? "");
-            closeModel(false)
-          } else {
-            ElMessage.error(res.data.data as string);
-          }
+          ElMessage.success("登陆成功！");
+          // 存储token
+          setToken(res.data?.token ?? "");
+          store.dispatch(`loginInfo/${Types.SET_LOGIN_INFO}`, true);
+          closeModel(false);
+        } else {
+          ElMessage.error(res.data.data as string);
+        }
       });
     };
     return {
