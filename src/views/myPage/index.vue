@@ -2,28 +2,31 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 13:27:36
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-04 16:27:58
+ * @LastEditTime: 2022-04-25 09:56:03
  * @Description: file content
  * @FilePath: \find-project\src\views\myPage\index.vue
 -->
 
 <template>
-  <div class="myPage mt-2">
-    <div class="mainBox">
-      <personalInfo />
-      <articleInfo />
+  <suspense>
+    <div class="myPage mt-2">
+      <div class="mainBox">
+        <personalInfo :personInfos="personInfos" />
+        {{ personInfos }}
+        <articleInfo />
+      </div>
     </div>
-  </div>
+  </suspense>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { onMounted, reactive, onBeforeMount } from "vue";
 import personalInfo from "@/components/myPage/personalInfo.vue";
 import articleInfo from "@/components/myPage/articleInfo.vue";
-
-export default defineComponent({
-  components: { personalInfo, articleInfo },
-  setup() {
-    return {};
-  },
-});
+import { useGetUserInfo } from "@/hooks/useGetUserInfo";
+import { UserInfoItem } from "@/interface/myPage";
+let personInfos = reactive({});
+// onBeforeMount(async () => {
+  personInfos = await useGetUserInfo();
+  console.log(personInfos);
+// }); 
 </script>

@@ -2,11 +2,12 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 14:36:25
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-04 16:16:46
+ * @LastEditTime: 2022-04-25 09:55:11
  * @Description: file content
  * @FilePath: \find-project\src\components\myPage\personalInfo.vue
 -->
 <template>
+<suspense>
   <div class="personalInfo">
     <el-card class="box-card">
       <div class="content d-flex jc-sb ai-c">
@@ -18,6 +19,7 @@
           ></el-avatar>
           <div class="others">
             <div class="nickname fs-18 mb-2">阿周</div>
+            {{ personInfos }}
             <div class="signature fs-12 c-999 mb-2">
               天空不曾留下痕迹，但我已飞过。
             </div>
@@ -34,12 +36,13 @@
       </div>
     </el-card>
   </div>
+  </suspense>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  setup() {},
+<script lang="ts" setup>
+// import { defineProps} from "vue";
+import { UserInfoItem } from "@/interface/myPage";
+defineProps({
+  personInfos: Object,
 });
 </script>
 <style lang="less" scoped>
@@ -54,8 +57,8 @@ export default defineComponent({
       cursor: pointer;
       border-right: 1px solid #ccc;
     }
-    .box p:hover{
-        color: cornflowerblue;
+    .box p:hover {
+      color: cornflowerblue;
     }
     .box p:last-child {
       border: none;

@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-04-14 10:24:19
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-19 10:43:20
+ * @LastEditTime: 2022-04-24 18:57:18
  * @Description: file content
  * @FilePath: \find-project\src\hooks\useRegisterOrLogin.ts
  */
@@ -21,3 +21,4 @@ export const useCheckVerifyCode = async (verifyCode: string) => {
     ElMessage.error(res.data.data as string);
     return false;
 }
+    
