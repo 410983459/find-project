@@ -2,24 +2,18 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 14:36:25
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-25 09:55:11
+ * @LastEditTime: 2022-04-25 13:56:57
  * @Description: file content
  * @FilePath: \find-project\src\components\myPage\personalInfo.vue
 -->
 <template>
-<suspense>
   <div class="personalInfo">
     <el-card class="box-card">
       <div class="content d-flex jc-sb ai-c">
         <div class="left d-flex">
-          <el-avatar
-            class="mr-4"
-            :size="70"
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          ></el-avatar>
+          <img class="mr-4" :src="imgurl" width="70" height="70" alt="" />
           <div class="others">
-            <div class="nickname fs-18 mb-2">阿周</div>
-            {{ personInfos }}
+            <div class="nickname fs-18 mb-2">{{ personInfos.Nickname }}</div>
             <div class="signature fs-12 c-999 mb-2">
               天空不曾留下痕迹，但我已飞过。
             </div>
@@ -36,14 +30,13 @@
       </div>
     </el-card>
   </div>
-  </suspense>
 </template>
 <script lang="ts" setup>
-// import { defineProps} from "vue";
 import { UserInfoItem } from "@/interface/myPage";
-defineProps({
+const props = defineProps({
   personInfos: Object,
 });
+let imgurl = process.env.VUE_APP_IMGURL + props.personInfos?.AvatarUrl;
 </script>
 <style lang="less" scoped>
 .personalInfo {
