@@ -2,22 +2,13 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 15:07:10
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-04 16:36:17
+ * @LastEditTime: 2022-04-25 14:12:02
  * @Description: file content
  * @FilePath: \find-project\src\components\myPage\articleInfo.vue
 -->
 <template>
   <div class="articleInfo">
     <el-card class="box-card">
-      <!-- <template #header>
-        <div class="card-header">
-          <el-button class="button" type="text">动态</el-button>
-          <el-button class="button" type="text">文章</el-button>
-          <el-button class="button" type="text">一角</el-button>
-          <el-button class="button" type="text">赞</el-button>
-          <el-button class="button" type="text">收藏</el-button>
-        </div>
-      </template> -->
       <el-tabs
         v-model="activeName"
         type="card"

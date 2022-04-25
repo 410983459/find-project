@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 14:36:25
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-25 13:56:57
+ * @LastEditTime: 2022-04-25 14:14:54
  * @Description: file content
  * @FilePath: \find-project\src\components\myPage\personalInfo.vue
 -->
@@ -25,18 +25,24 @@
           </div>
         </div>
         <div class="right">
-          <el-button class="login" type="primary" plain>编辑资料</el-button>
+          <el-button class="login" type="primary" plain @click="editInfo"
+            >编辑资料</el-button
+          >
         </div>
       </div>
     </el-card>
   </div>
 </template>
 <script lang="ts" setup>
-import { UserInfoItem } from "@/interface/myPage";
+import { useRouter } from "vue-router";
 const props = defineProps({
   personInfos: Object,
 });
 let imgurl = process.env.VUE_APP_IMGURL + props.personInfos?.AvatarUrl;
+const router = useRouter();
+const editInfo = () => {
+  router.push("/setting");
+};
 </script>
 <style lang="less" scoped>
 .personalInfo {

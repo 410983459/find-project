@@ -127,7 +127,7 @@ a:hover img {
   border: none;
 }
 
-body{
+body {
   background-color: #f9f9f9;
 }
 
@@ -199,7 +199,7 @@ body{
   display: flex;
 }
 
-.jc-c {
+.jc-c ,.justify-center{
   justify-content: center;
 }
 
@@ -219,7 +219,7 @@ body{
   justify-content: flex-start;
 }
 
-.ai-c {
+.ai-c, .align-center {
   align-items: center;
 }
 
@@ -282,6 +282,7 @@ body{
 .pb-4 {
   padding-bottom: 20px;
 }
+
 .pa-6 {
   padding: 30px;
 }
@@ -309,6 +310,7 @@ body{
 .pb-6 {
   padding-bottom: 30px;
 }
+
 .ma-0 {
   margin: 0;
 }
