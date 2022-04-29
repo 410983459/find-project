@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-28 17:12:34
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-29 17:13:26
+ * @LastEditTime: 2022-04-29 14:19:51
  * @Description: 个人设置
  * @FilePath: \find-project\src\components\settingInfo\personalInfo.vue
 -->
@@ -18,7 +18,7 @@
         </div>
       </el-col>
       <el-col :span="8">
-        <el-button plain>编辑资料</el-button>
+        <el-button plain @toEdit='toEdit'>编辑资料</el-button>
         <p class="c-999 fs-12 mt-2">只能上传png、jpeg文件，且大小不超过2M</p>
       </el-col>
     </el-row>
@@ -53,7 +53,10 @@ export default defineComponent({
       personalInfo,
       activeName: "first",
     });
-    return { ...state, UserFilled };
+    const toEdit =()=>{
+
+    }
+    return { ...state, UserFilled ,toEdit};
   },
 });
 </script>
