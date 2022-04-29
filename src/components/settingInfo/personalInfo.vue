@@ -17,11 +17,11 @@
               class="avatar-uploader"
               :action="`${VUE_APP_URL}/post/UploadFile`"
               :show-file-list="false"
-              :limit="1"
               accept=".png,.PNG,.jpg,.jpeg,.JPG,JPEG"
               :on-success="onSuccess"
               :on-error="onError"
               :headers="{ token: token }"
+              :on-change="handleExceed"
             >
               <img
                 :src="personAvatarUrl"
@@ -146,6 +146,12 @@ const onSubmit = async () => {
   // ElMessage.success(res.data.data);
   state.isDisabled = !state.isDisabled;
 };
+
+const handleExceed = (files: any, fileList: any)=> {
+  if (fileList.length > 1) {
+    fileList.splice(0, 1)
+  }
+}
 </script>
 <style lang="scss">
 .personalInfo {
