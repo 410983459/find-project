@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-28 16:28:33
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-28 19:42:46
+ * @LastEditTime: 2022-04-29 14:55:33
  * @Description: file content
  * @FilePath: \find-project\src\views\settingInfo\pageConfig.ts
  */
@@ -56,27 +56,27 @@ export const listInfo: ListInfo[] = [
 export const personalInfo: PersonalInfo[] = [
     {
         label: '昵称',
-        key: 'nickname',
+        key: 'NickName',
     },
     {
         label: '位置',
-        key: 'address',
+        key: 'Address',
     },
     {
         label: '公司',
-        key: 'company',
+        key: 'Company',
     },
     {
         label: '学校',
-        key: 'school',
+        key: 'School',
     },
     {
         label: '个人网站',
-        key: 'personalWeb',
+        key: 'Network',
     },
     {
         label: '个人简介',
-        key: 'personalIntroduction',
+        key: 'Signature',
         limit:100
     },
 ]

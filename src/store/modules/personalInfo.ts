@@ -20,7 +20,7 @@ export const personalInfo: Module<PersonalInfo, RootState> = {
             AvatarUrl: '',
             Company: '',
             Network: '',
-            Nickname: '',
+            NickName: '',
             School: '',
             Score: 0,
             Signature: '',

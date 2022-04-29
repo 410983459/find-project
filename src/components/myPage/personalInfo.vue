@@ -13,7 +13,7 @@
         <div class="left d-flex">
           <img class="mr-4" :src="IMG_BASE_URL + personInfos?.AvatarUrl" width="70" height="70" alt="" />
           <div class="others">
-            <div class="nickname fs-18 mb-2">{{ personInfos?.Nickname }}</div>
+            <div class="NickName fs-18 mb-2">{{ personInfos?.NickName }}</div>
             <div class="signature fs-12 c-999 mb-2">
               {{personInfos?.Signature}}
             </div>
