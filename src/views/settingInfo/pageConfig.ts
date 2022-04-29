@@ -2,11 +2,13 @@
  * @Author: ZhouCong
  * @Date: 2022-03-28 16:28:33
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-29 14:55:33
+ * @LastEditTime: 2022-04-29 18:45:07
  * @Description: file content
  * @FilePath: \find-project\src\views\settingInfo\pageConfig.ts
  */
 import { ListInfo, PersonalInfo } from '@/interface/basic'
+
+import { UserInfoItem } from "@/interface/myPage";
 export const listInfo: ListInfo[] = [
     {
         label: '账号_ID',
@@ -80,3 +82,13 @@ export const personalInfo: PersonalInfo[] = [
         limit:100
     },
 ]
+
+export let defaultPersonData:UserInfoItem={
+    Address: '',
+    AvatarUrl: '',
+    Company: '',
+    Network: '',
+    NickName: '',
+    School: '',
+    Signature: '',
+}

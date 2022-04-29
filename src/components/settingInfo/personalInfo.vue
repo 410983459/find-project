@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-28 17:12:34
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-29 16:04:20
+ * @LastEditTime: 2022-04-29 19:42:47
  * @Description: 个人设置
  * @FilePath: \find-project\src\components\settingInfo\personalInfo.vue
 -->
@@ -13,13 +13,25 @@
       <el-col :span="4">
         <div class="demo-basic--circle">
           <div class="block">
-            <img
-              :src="IMG_BASE_URL + person?.AvatarUrl"
-              class="cp"
-              width="90"
-              height="90"
-              alt=""
-            />
+            <el-upload
+              class="avatar-uploader"
+              :action="`${VUE_APP_URL}/post/UploadFile`"
+              :show-file-list="false"
+              :limit="1"
+              accept=".png,.PNG,.jpg,.jpeg,.JPG,JPEG"
+              :on-success="onSuccess"
+              :on-error="onError"
+              :headers="{ token: token }"
+            >
+              <img
+                :src="personAvatarUrl"
+                class="cp"
+                width="90"
+                height="90"
+                alt=""
+              />
+              <!-- <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon> -->
+            </el-upload>
           </div>
         </div>
       </el-col>
@@ -30,7 +42,7 @@
         <p class="c-999 fs-12 mt-2">只能上传png、jpeg文件，且大小不超过2M</p>
       </el-col>
     </el-row>
-    <el-form class="personalInfoFrom d-flex" :model="formInline">
+    <el-form class="personalInfoFrom d-flex">
       <!-- 个人信息 -->
       <el-form-item v-for="item in state.personalInfo" :key="item.key">
         <el-input
@@ -54,14 +66,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { computed, reactive } from "vue";
+import { computed, reactive, ref } from "vue";
 import { personalInfo } from "@/views/settingInfo/pageConfig";
 import { UserFilled } from "@element-plus/icons-vue";
 import { useStore } from "vuex";
 import { editUserInfo } from "@/api/myPage";
-import { UserInfoItem } from "@/interface/myPage";
 import { ElMessage } from "element-plus";
-
+import { getToken } from "@/utils/request/token";
+import * as Types from "@/store/types";
+import { UserInfoItem } from "@/interface/myPage";
+import { defaultPersonData } from "@/views/settingInfo/pageConfig";
 const state = reactive({
   formData: {},
   personalInfo,
@@ -70,20 +84,66 @@ const state = reactive({
 const store = useStore();
 // 从store中获取个人信息
 const IMG_BASE_URL = process.env.VUE_APP_IMGURL;
-const person = computed(() => store.state.personalInfo.personalInfo);
+// const person = computed(() => store.state.personalInfo.personalInfo);
+// const personAvatarUrl = ref(IMG_BASE_URL + person.value.AvatarUrl);
+let personAvatarUrl = ref("");
+
+const person: any = computed({
+  get() {
+    personAvatarUrl.value =
+      IMG_BASE_URL + store.state.personalInfo.personalInfo?.AvatarUrl;
+    return store.state.personalInfo.personalInfo;
+  },
+  set: (val) => {
+    // personAvatar1Url.value = IMG_BASE_URL + val.value.AvatarUrl
+  },
+});
+// 头像
+console.log(personAvatarUrl);
+
 // 编辑
 const toEdit = () => {
   state.isDisabled = !state.isDisabled;
 };
+// 文件上传
+const token = getToken();
+const VUE_APP_URL = process.env.VUE_APP_URL;
+// 头像
+let newAvatarUrl = "";
+// 上传成功回调
+const onSuccess = (response: any) => {
+  if (response.code !== 200) return;
+  // 请求个人信息数据
+  // store.dispatch(`personalInfo/${Types.SET_PERSONAL_INFO}`);
+  console.log(response);
+
+  // 变更新头像
+  personAvatarUrl.value = IMG_BASE_URL + response.data.img;
+  newAvatarUrl = response.data.img;
+  ElMessage.success("上传成功！");
+};
+// 上传失败回调
+const onError = (response: any) => {
+  console.log(response);
+  ElMessage.error("上传失败！");
+};
 // 保存
 const onSubmit = async () => {
-  const res = await editUserInfo(person.value);
-  console.log(res);
-  if (res.data.code !== 200) {
-    ElMessage.error(res.data.data);
-    return;
+  let param: UserInfoItem = defaultPersonData;
+  if (newAvatarUrl) {
+    param = { ...person.value, AvatarUrl: newAvatarUrl };
+  } else {
+    param = { ...person.value };
   }
-  ElMessage.success(res.data.data);
+  console.log(param);
+
+  // const res = await editUserInfo(param);
+  // console.log(res);
+  // if (res.data.code !== 200) {
+  //   ElMessage.error(res.data.data);
+  //   return;
+  // }
+  // ElMessage.success(res.data.data);
   state.isDisabled = !state.isDisabled;
 };
 </script>
