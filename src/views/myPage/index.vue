@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 13:27:36
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-29 14:00:10
+ * @LastEditTime: 2022-04-29 14:30:17
  * @Description: file content
  * @FilePath: \find-project\src\views\myPage\index.vue
 -->
@@ -22,7 +22,5 @@ import personalInfo from "@/components/myPage/personalInfo.vue";
 import articleInfo from "@/components/myPage/articleInfo.vue";
 import * as Types from "@/store/types";
 const store = useStore();
-// 请求个人信息数据
-store.dispatch(`personalInfo/${Types.SET_PERSONAL_INFO}`);
 const person = computed(()=> store.state.personalInfo.personalInfo);
 </script>

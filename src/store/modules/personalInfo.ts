@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-04-29 11:18:15
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-29 13:20:59
+ * @LastEditTime: 2022-04-29 14:41:51
  * @Description: file content
  * @FilePath: \find-project\src\store\modules\personalInfo.ts
  */
@@ -34,7 +34,6 @@ export const personalInfo: Module<PersonalInfo, RootState> = {
     actions: {
         async [Types.SET_PERSONAL_INFO]({ commit }) {
             const res = await useGetUserInfo()
-            console.log(res);
             commit(Types.SET_PERSONAL_INFO, res)
         }
     },

@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-01 13:10:40
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-19 17:20:53
+ * @LastEditTime: 2022-04-29 14:32:19
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\register\index.vue
 -->
@@ -132,6 +132,8 @@ export default defineComponent({
             // 存储token
             setToken(res.data?.token ?? "");
             store.dispatch(`loginInfo/${Types.SET_LOGIN_INFO}`, true);
+            // 请求个人信息数据
+            store.dispatch(`personalInfo/${Types.SET_PERSONAL_INFO}`);
             closeModel(false);
           } else {
             ElMessage.error(res.data.data as string);
