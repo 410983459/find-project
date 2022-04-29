@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 14:36:25
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-25 14:14:54
+ * @LastEditTime: 2022-04-29 11:12:11
  * @Description: file content
  * @FilePath: \find-project\src\components\myPage\personalInfo.vue
 -->
@@ -15,7 +15,7 @@
           <div class="others">
             <div class="nickname fs-18 mb-2">{{ personInfos.Nickname }}</div>
             <div class="signature fs-12 c-999 mb-2">
-              天空不曾留下痕迹，但我已飞过。
+              {{personInfos.Signature}}
             </div>
             <div class="box d-flex jc-fs ai-c">
               <p><span class="fw-b">2</span>&nbsp;&nbsp;文章</p>
