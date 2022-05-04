@@ -2,14 +2,14 @@
  * @Author: ZhouCong
  * @Date: 2022-02-28 11:38:09
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-04 10:09:15
+ * @LastEditTime: 2022-04-29 14:32:02
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\loginAndRegister\login\login.vue
 -->
 <template>
   <div class="login">
-    <el-form :model="form" align="center">
-      <el-form-item>
+    <el-form :model="form" align="center" :rules="rules" ref="loginForm">
+      <el-form-item prop="account">
         <el-input
           placeholder="用户名"
           v-model="form.account"
@@ -17,12 +17,12 @@
         >
           <template #prefix>
             <el-icon class="el-input__icon">
-             <user />
+              <user />
             </el-icon>
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
         <el-input
           v-model="form.password"
           placeholder="密码"
@@ -37,24 +37,28 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item class="verify">
+      <el-form-item class="verify" prop="verifyCode">
         <el-input
-          v-model="form.password"
+          v-model="form.verifyCode"
           placeholder="验证码"
           autocomplete="off"
-          type="password"
-          show-password
+          clearable
         >
+          <!-- @blur="checkVerifyCode" -->
           <template #prefix>
             <el-icon class="el-input__icon">
-              <lock />
+              <Lock />
             </el-icon>
           </template>
         </el-input>
         <img
-          class="verifyCode"
-          src="../../../../assets/images/yzm.png"
-          alt=""
+          width="160"
+          height="32"
+          class="cp"
+          @click="verifyCodeImg = `${verifyCodeImgURL}?time=${Date.now()}`"
+          :src="verifyCodeImg"
+          alt="验证码"
+          srcset=""
         />
       </el-form-item>
     </el-form>
@@ -67,7 +71,9 @@
     <!-- </template>
     <template #btn> -->
     <div class="dialog-footer mt-4">
-      <el-button class="login" type="primary">登录</el-button>
+      <el-button class="login" type="primary" @click="login(loginForm)"
+        >登录</el-button
+      >
     </div>
     <!-- </template>
   </comLoginAndRegister> -->
@@ -75,22 +81,74 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref, toRefs, inject } from "vue";
 import { IconItem } from "@/interface/basic";
+import { RegisterAndLogin } from "@/interface/loginAndRegister";
 import { iconList } from "../../pageConfig";
+import { rules } from "../pageConfig";
 import { User, Lock, Key } from "@element-plus/icons-vue";
+import { useCheckVerifyCode } from "@/hooks/useRegisterOrLogin";
+import { toLogin } from "@/api/loginAndRegister";
+import { ElMessage } from "element-plus";
+import { useStore } from "vuex";
+import { RootState } from "@/store/interface";
+import * as Types from "@/store/types";
+import { setToken } from "@/utils/request/token";
 
 export default defineComponent({
   components: { User, Lock, Key },
   setup() {
+    let verifyCodeImgURL = ref(`${process.env.VUE_APP_URL}/captcha/CaptchaImg`);
+    let verifyCodeImg = verifyCodeImgURL;
     const iconImgList: IconItem[] = iconList;
-    const form = reactive({
-      account: "",
-      password: "",
+    const state = reactive({
+      form: {
+        account: "",
+        password: "",
+        verifyCode: "",
+      },
+      rules: rules,
     });
+    // 登录
+    const loginForm = ref<any>();
+    // store
+    let store = useStore<RootState>();
+    // 关闭弹窗
+    const closeModel: any = inject("handleLogin");
+    const login = async (loginForm: any | undefined) => {
+      await loginForm.validate(async (valid: boolean) => {
+        if (!valid) return;
+        const VerifyCodeValid = await useCheckVerifyCode(state.form.verifyCode);
+        // 更换验证码
+        if (!VerifyCodeValid)
+          return (verifyCodeImg.value = `${
+            verifyCodeImgURL.value
+          }?time=${Date.now()}`);
+        let param: RegisterAndLogin = {
+          account: state.form.account,
+          password: state.form.password,
+        };
+        const res = await toLogin(param);
+        if (res && res.data && res.data.code == 200) {
+          ElMessage.success("登陆成功！");
+          // 存储token
+          setToken(res.data?.token ?? "");
+          store.dispatch(`loginInfo/${Types.SET_LOGIN_INFO}`, true);
+          // 请求个人信息数据
+          store.dispatch(`personalInfo/${Types.SET_PERSONAL_INFO}`);
+          closeModel(false);
+        } else {
+          ElMessage.error(res.data.data as string);
+        }
+      });
+    };
     return {
-      form,
+      ...toRefs(state),
       iconImgList,
+      verifyCodeImg,
+      verifyCodeImgURL,
+      login,
+      loginForm,
     };
   },
 });
@@ -111,7 +169,7 @@ export default defineComponent({
 .verify {
   /deep/.el-form-item__content {
     .el-input {
-      width: auto;
+      width: calc(100% - 160px);
     }
   }
   .verifyCode {

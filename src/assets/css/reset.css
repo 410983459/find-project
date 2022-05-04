@@ -127,6 +127,9 @@ a:hover img {
   border: none;
 }
 
+body {
+  background-color: #f9f9f9;
+}
 
 /*清除浮动*/
 .clearfix:after {
@@ -196,7 +199,7 @@ a:hover img {
   display: flex;
 }
 
-.jc-c {
+.jc-c ,.justify-center{
   justify-content: center;
 }
 
@@ -216,7 +219,7 @@ a:hover img {
   justify-content: flex-start;
 }
 
-.ai-c {
+.ai-c, .align-center {
   align-items: center;
 }
 
@@ -280,6 +283,34 @@ a:hover img {
   padding-bottom: 20px;
 }
 
+.pa-6 {
+  padding: 30px;
+}
+
+.px-6 {
+  padding: 30px 0;
+}
+
+.py-6 {
+  padding: 0 30px;
+}
+
+.pt-6 {
+  padding-top: 30px;
+}
+
+.pr-6 {
+  padding-right: 30px;
+}
+
+.pl-6 {
+  padding-left: 30px;
+}
+
+.pb-6 {
+  padding-bottom: 30px;
+}
+
 .ma-0 {
   margin: 0;
 }
@@ -322,4 +353,8 @@ a:hover img {
 
 .c-999 {
   color: #999;
+}
+
+.cp {
+  cursor: pointer;
 }

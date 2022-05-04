@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-02 11:13:54
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-03-03 15:29:56
+ * @LastEditTime: 2022-04-29 14:07:17
  * @Description: file content
  * @FilePath: \find-project\src\views\home\index.vue
 -->
@@ -32,7 +32,7 @@ export default defineComponent({
 <style lang="less">
 .container {
   .content {
-    width: 1100px;
+    max-width: 1100px;
     margin: 0 auto;
     margin-top: 20px;
   }
