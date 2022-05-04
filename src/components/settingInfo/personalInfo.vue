@@ -10,29 +10,33 @@
   <div class="personalInfo">
     <!-- 头像 -->
     <el-row class="pb-6 pa-2 d-flex ai-c">
-      <el-col :span="4">
-        <div class="demo-basic--circle">
-          <div class="block">
-            <el-upload
-              class="avatar-uploader"
-              :action="`${VUE_APP_URL}/post/UploadFile`"
-              :show-file-list="false"
-              accept=".png,.PNG,.jpg,.jpeg,.JPG,JPEG"
-              :on-success="onSuccess"
-              :on-error="onError"
-              :headers="{ token: token }"
-              :on-change="handleExceed"
-            >
-              <img
-                :src="personAvatarUrl"
-                class="cp"
-                width="90"
-                height="90"
-                alt=""
-              />
-              <!-- <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon> -->
-            </el-upload>
-          </div>
+      <el-col :span="3" class="mr-4">
+        <div class="block ta-c">
+          <el-upload
+            class="avatar-uploader"
+            :action="`${VUE_APP_URL}/post/UploadFile`"
+            :show-file-list="false"
+            accept=".png,.PNG,.jpg,.jpeg,.JPG,JPEG"
+            :on-success="onSuccess"
+            :on-error="onError"
+            :headers="{ token: token }"
+            :on-change="handleExceed"
+            :on-progress="onProgress"
+            v-loading="loading"
+            :disabled="state.isDisabled"
+          >
+            <el-icon color="#fff" v-if="!state.isDisabled" :size="40" class="uploadIcon">
+              <plus />
+            </el-icon>
+            <img
+              :src="personAvatarUrl"
+              class="cp"
+              width="90"
+              height="90"
+              alt=""
+            />
+            <!-- <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon> -->
+          </el-upload>
         </div>
       </el-col>
       <el-col :span="8">
@@ -68,7 +72,7 @@
 <script lang="ts" setup>
 import { computed, reactive, ref } from "vue";
 import { personalInfo } from "@/views/settingInfo/pageConfig";
-import { UserFilled } from "@element-plus/icons-vue";
+import { UserFilled, Plus } from "@element-plus/icons-vue";
 import { useStore } from "vuex";
 import { editUserInfo } from "@/api/myPage";
 import { ElMessage } from "element-plus";
@@ -110,21 +114,26 @@ const token = getToken();
 const VUE_APP_URL = process.env.VUE_APP_URL;
 // 头像
 let newAvatarUrl = "";
+// 上传状态
+let loading = ref(false);
+// 开始上传
+const onProgress = () => {
+  loading.value = true;
+};
 // 上传成功回调
 const onSuccess = (response: any) => {
   if (response.code !== 200) return;
-  // 请求个人信息数据
-  // store.dispatch(`personalInfo/${Types.SET_PERSONAL_INFO}`);
   console.log(response);
-
   // 变更新头像
   personAvatarUrl.value = IMG_BASE_URL + response.data.img;
   newAvatarUrl = response.data.img;
+  loading.value = false;
   ElMessage.success("上传成功！");
 };
 // 上传失败回调
 const onError = (response: any) => {
   console.log(response);
+  loading.value = false;
   ElMessage.error("上传失败！");
 };
 // 保存
@@ -137,21 +146,23 @@ const onSubmit = async () => {
   }
   console.log(param);
 
-  // const res = await editUserInfo(param);
-  // console.log(res);
-  // if (res.data.code !== 200) {
-  //   ElMessage.error(res.data.data);
-  //   return;
-  // }
-  // ElMessage.success(res.data.data);
+  const res = await editUserInfo(param);
+  console.log(res);
+  if (res.data.code !== 200) {
+    ElMessage.error(res.data.data);
+    return;
+  }
+  ElMessage.success(res.data.data);
+  // 请求个人信息数据
+  store.dispatch(`personalInfo/${Types.SET_PERSONAL_INFO}`);
   state.isDisabled = !state.isDisabled;
 };
 
-const handleExceed = (files: any, fileList: any)=> {
+const handleExceed = (files: any, fileList: any) => {
   if (fileList.length > 1) {
-    fileList.splice(0, 1)
+    fileList.splice(0, 1);
   }
-}
+};
 </script>
 <style lang="scss">
 .personalInfo {
@@ -165,6 +176,16 @@ const handleExceed = (files: any, fileList: any)=> {
     .el-input.is-disabled .el-input__inner {
       background-color: #fff;
       color: #6b6c6e;
+    }
+  }
+  .block {
+    position: relative;
+    .uploadIcon {
+      position: absolute;
+      top: calc(50% - 20px);
+      left: calc(50% - 20px);
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
     }
   }
 }
