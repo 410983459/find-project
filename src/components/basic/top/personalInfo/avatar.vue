@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-04 09:53:21
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-29 14:41:11
+ * @LastEditTime: 2022-05-05 18:45:02
  * @Description: file content
  * @FilePath: \find-project\src\components\basic\top\personalInfo\avatar.vue
 -->
@@ -14,6 +14,7 @@
         <!-- <el-avatar :icon="UserFilled"></el-avatar> -->
         <img
           class="mr-4"
+          style="border-radius: 50%"
           :src="IMG_BASE_URL + person?.AvatarUrl"
           width="40"
           height="40"

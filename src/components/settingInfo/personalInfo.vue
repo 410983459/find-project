@@ -2,7 +2,7 @@
  * @Author: ZhouCong
  * @Date: 2022-03-28 17:12:34
  * @LastEditors: ZhouCong
- * @LastEditTime: 2022-04-29 19:42:47
+ * @LastEditTime: 2022-05-05 18:34:07
  * @Description: 个人设置
  * @FilePath: \find-project\src\components\settingInfo\personalInfo.vue
 -->
@@ -25,7 +25,12 @@
             v-loading="loading"
             :disabled="state.isDisabled"
           >
-            <el-icon color="#fff" v-if="!state.isDisabled" :size="40" class="uploadIcon">
+            <el-icon
+              color="#fff"
+              v-if="!state.isDisabled"
+              :size="40"
+              class="uploadIcon"
+            >
               <plus />
             </el-icon>
             <img
@@ -102,9 +107,6 @@ const person: any = computed({
     // personAvatar1Url.value = IMG_BASE_URL + val.value.AvatarUrl
   },
 });
-// 头像
-console.log(personAvatarUrl);
-
 // 编辑
 const toEdit = () => {
   state.isDisabled = !state.isDisabled;
@@ -123,7 +125,6 @@ const onProgress = () => {
 // 上传成功回调
 const onSuccess = (response: any) => {
   if (response.code !== 200) return;
-  console.log(response);
   // 变更新头像
   personAvatarUrl.value = IMG_BASE_URL + response.data.img;
   newAvatarUrl = response.data.img;
@@ -132,7 +133,6 @@ const onSuccess = (response: any) => {
 };
 // 上传失败回调
 const onError = (response: any) => {
-  console.log(response);
   loading.value = false;
   ElMessage.error("上传失败！");
 };
@@ -145,9 +145,7 @@ const onSubmit = async () => {
     param = { ...person.value };
   }
   console.log(param);
-
   const res = await editUserInfo(param);
-  console.log(res);
   if (res.data.code !== 200) {
     ElMessage.error(res.data.data);
     return;
