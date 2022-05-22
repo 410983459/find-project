@@ -28,7 +28,9 @@
     <!-- 登录状态(展示头像和下拉状态) -->
     <avatar v-if="isLogin"></avatar>
     <!-- 未登录状态 -->
-    <el-button v-else type="primary" plain @click="login(true)"> 登录/注册 </el-button>
+    <el-button v-else type="primary" plain @click="login(true)">
+      登录/注册
+    </el-button>
   </div>
 </template>
 
@@ -43,6 +45,8 @@ import { themes } from "@/utils/theme/themes";
 import { colorMix } from "@/utils/theme/tool.js";
 import { useStore } from "vuex";
 import { RootState } from "@/store/interface";
+import { getToken } from "@/utils/request/token";
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
   components: { EditPen, avatar },
@@ -66,6 +70,10 @@ export default defineComponent({
     // 跳转写文章
     const router = useRouter();
     const toCreate = () => {
+      if (!getToken()) {
+        ElMessage.error("请先登录！");
+        return;
+      }
       router.push("/create");
     };
     // 切换主题色
@@ -100,7 +108,7 @@ export default defineComponent({
       toCreate,
       changeTheme,
       ...toRefs(state),
-      isLogin
+      isLogin,
     };
   },
 });
