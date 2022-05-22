@@ -16,41 +16,13 @@
           @open="handleOpen"
           @close="handleClose"
         >
-          <el-menu-item index="2">
+          <el-menu-item
+            :index="index"
+            v-for="(item, index) in CategoriesList"
+            :key="item.id"
+          >
             <!-- <el-icon><icon-menu /></el-icon> -->
-            全部
-          </el-menu-item>
-          <el-menu-item index="1">
-            <!-- <el-icon><icon-menu /></el-icon> -->
-            后端
-          </el-menu-item>
-          <el-menu-item index="3">
-            <!-- <el-icon><document /></el-icon> -->
-            前端
-          </el-menu-item>
-          <el-menu-item index="4">
-            <!-- <el-icon><setting /></el-icon> -->
-            Android
-          </el-menu-item>
-          <el-menu-item index="5">
-            <!-- <el-icon><setting /></el-icon> -->
-            IOS
-          </el-menu-item>
-          <el-menu-item index="6">
-            <!-- <el-icon><setting /></el-icon> -->
-            人工智能
-          </el-menu-item>
-          <el-menu-item index="7">
-            <!-- <el-icon><setting /></el-icon> -->
-            卡开发工具
-          </el-menu-item>
-          <el-menu-item index="8">
-            <!-- <el-icon><setting /></el-icon> -->
-            代码人生
-          </el-menu-item>
-          <el-menu-item index="9">
-            <!-- <el-icon><setting /></el-icon> -->
-            阅读
+            {{ item.Name }}
           </el-menu-item>
         </el-menu>
       </el-card>
@@ -65,7 +37,7 @@ import {
   Menu as IconMenu,
   Setting,
 } from "@element-plus/icons-vue";
-import { onMounted } from "vue-demi";
+import { inject } from "vue";
 
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
@@ -73,14 +45,15 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
-
+// 获取父组件传过来的分类数据
+let CategoriesList = inject("CategoriesList");
 </script>
 <style lang="less">
 .tac {
   .el-menu {
     border-right: none;
     li {
-      padding: 20px;
+      padding: 10px 50px !important;
       justify-content: center;
     }
   }

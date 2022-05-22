@@ -10,23 +10,24 @@
   <div class="container">
     <div class="content d-flex">
       <!-- 侧边导航 -->
-      <sideNav />
+      <sideNav :CategoriesList="CategoriesList" />
       <!-- 文章列表 -->
       <router-view />
     </div>
   </div>
   <!-- <router-view /> -->
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { computed,provide } from "vue";
 import sideNav from "@/components/basic/sideNav/index.vue";
+import { useStore } from "vuex";
+import { RootState } from "@/store/interface";
 
-export default defineComponent({
-  components: { sideNav },
-  setup() {
-    return {};
-  },
-});
+// store
+let store = useStore<RootState>();
+
+let CategoriesList = computed(() => store.state.CategoriesAndTag.categories);
+provide('CategoriesList',CategoriesList)
 </script>
 
 <style lang="less">
