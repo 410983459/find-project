@@ -10,7 +10,8 @@
   <el-card class="box-card">
     <template #header>
       <div class="card-header">
-        <el-button class="button" type="text">Operation button</el-button>
+        <el-button class="button" type="text">最新</el-button>
+        <el-button class="button" type="text" plain style="color:#333">热门</el-button>
       </div>
     </template>
     <articleInfo />

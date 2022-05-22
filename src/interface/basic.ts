@@ -7,23 +7,23 @@
  * @FilePath: \find-project\src\interface\basic.ts
  */
 export interface commInterface {
-  label: String;
-  key: String;
+  label: string;
+  key: string;
 }
 export type MenuItem = commInterface
 export interface IconItem extends commInterface {
-  url: String
+  url: string
 }
 // export interface InfoDropdownitem extends commInterface {
-//   icon: String
+//   icon: string
 // }
 
 export type InfoDropdownitem = commInterface
 export interface ListInfo extends commInterface {
-  subtitle?: String,
-  operate: String
-  init?: String
+  subtitle?: string,
+  operate: string
+  init?: string
 }
 export interface PersonalInfo extends commInterface {
-  limit?: Number
+  limit?: number
 }

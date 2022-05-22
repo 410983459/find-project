@@ -11,3 +11,7 @@
 export const SET_LOGIN_INFO = 'SET_LOGIN_INFO'
 // 用户信息
 export const SET_PERSONAL_INFO = 'SET_PERSONAL_INFO'
+// 分类
+export const GET_CATEGORIES = 'GET_CATEGORIES'
+// 标签
+export const GET_TAG = 'GET_TAG'

@@ -15,10 +15,7 @@
         class="demo-tabs"
         @tab-click="handleClick"
       >
-        <el-tab-pane label="动态" name="first">
-          <articleItem />
-        </el-tab-pane>
-        <el-tab-pane label="文章" name="second">
+        <el-tab-pane label="文章" name="first">
           <articleItem />
         </el-tab-pane>
         <el-tab-pane label="一角" name="third">
@@ -28,6 +25,9 @@
           <articleItem />
         </el-tab-pane>
         <el-tab-pane label="收藏" name="fifth">
+          <articleItem />
+        </el-tab-pane>
+        <el-tab-pane label="动态" name="second">
           <articleItem />
         </el-tab-pane>
       </el-tabs>

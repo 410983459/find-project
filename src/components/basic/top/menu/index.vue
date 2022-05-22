@@ -38,7 +38,7 @@ export default defineComponent({
     let menu: MenuItem[] = menuList;
     const router = useRouter();
     // 菜单点击方法
-    const menuClick = (key: String) => {
+    const menuClick = (key: string) => {
       router.push(`/${key}`);
     };
     return {

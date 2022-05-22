@@ -11,6 +11,7 @@ import { createStore } from 'vuex'
 import { loginInfo } from './modules/loginInfo'
 import { personalInfo } from './modules/personalInfo'
 import { RootState } from './interface'
+import {CategoriesAndTag} from './modules/CategoriesAndTag'
 
 export default createStore<RootState>({
   mutations: {
@@ -19,6 +20,7 @@ export default createStore<RootState>({
   },
   modules: {
     loginInfo,
-    personalInfo
+    personalInfo,
+    CategoriesAndTag
   }
 })

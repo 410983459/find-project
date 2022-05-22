@@ -35,6 +35,10 @@ export default defineComponent({
     // store
     let store = useStore<RootState>();
     onMounted(() => {
+      // 请求分类数据
+      store.dispatch(`CategoriesAndTag/${Types.GET_CATEGORIES}`);
+      // 请求标签数据
+      store.dispatch(`CategoriesAndTag/${Types.GET_TAG}`);
       // 判断是否是登录状态
       if (!getToken()) return;
       store.dispatch(`loginInfo/${Types.SET_LOGIN_INFO}`, true);
@@ -48,5 +52,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="less">
-</style>
+<style lang="less"></style>

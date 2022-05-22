@@ -8,15 +8,19 @@
  */
 
 import { UserInfoItem } from "@/interface/myPage";
+import { CategoriesListApiParam, ICategoriesItem } from "@/interface/home";
 export interface LoginState {
-    isLogin: boolean
+  isLogin: boolean;
 }
 //定义RootState接口，将所有模块类型放入
 export interface RootState {
-    loginInfo: LoginState,
-    personalInfo: PersonalInfo
+  loginInfo: LoginState;
+  personalInfo: PersonalInfo;
 }
 export interface PersonalInfo {
-    personalInfo: UserInfoItem
+  personalInfo: UserInfoItem;
 }
-
+export interface CategoriesAndTagInter {
+  categories: ICategoriesItem[];
+  tag: any;
+}

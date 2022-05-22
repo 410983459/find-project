@@ -7,9 +7,9 @@
  * @FilePath: \find-project\src\interface\loginAndRegister.ts
  */
 export interface RulesItem {
-    required: Boolean,
-    message: String,
-    trigger: String,
+    required: boolean,
+    message: string,
+    trigger: string,
 }
 export interface Rules {
     account: RulesItem[],
@@ -17,9 +17,9 @@ export interface Rules {
     verifyCode: RulesItem[],
 }
 export interface verifyCodeParam{
-    captcha:String
+    captcha:string
 }
 export interface RegisterAndLogin{
-    account:String,
-    password:String
+    account:string,
+    password:string
 }
