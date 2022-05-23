@@ -9,11 +9,12 @@
 import http from '@/utils/request/index'
 import { AxiosPromise } from 'axios';
 import { comRes } from '@/interface/request'
-import {CategoriesListApiParam} from '@/interface/home'
+import {CategoriesListApiParam,ArticleListParam} from '../interface/home'
 
 const URLS = {
     CategoriesListApi: '/post/CategoriesList',//查询分类
     TagListApi: '/post/TagList',//查询分类
+    articleList:'/post/PostList',//文章列表
 }
 
 //  查询分类
@@ -28,6 +29,14 @@ export const getCategoriesList = (params: CategoriesListApiParam): AxiosPromise<
 export const getTagList = (params: CategoriesListApiParam): AxiosPromise<comRes> => {
     return http.request<comRes>({
         url: URLS.TagListApi,
+        method: 'get',
+        params: params
+    });
+};
+//  文章列表
+export const getArticleList = (params: ArticleListParam): AxiosPromise<comRes> => {
+    return http.request<comRes>({
+        url: URLS.articleList,
         method: 'get',
         params: params
     });

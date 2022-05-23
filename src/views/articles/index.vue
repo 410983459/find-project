@@ -11,22 +11,35 @@
     <template #header>
       <div class="card-header">
         <el-button class="button" type="text">最新</el-button>
-        <el-button class="button" type="text" plain style="color:#333">热门</el-button>
+        <el-button class="button" type="text" plain style="color: #333"
+          >热门</el-button
+        >
       </div>
     </template>
-    <articleInfo />
+    <articleInfo :articleList="articleListObj.postList" />
   </el-card>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { onMounted, reactive } from "vue";
 import articleInfo from "@/components/article/articleItem.vue";
-
-export default defineComponent({
-  components: { articleInfo },
-  setup() {},
+import { getArticleList } from "@/api/home";
+import { ArticleRes } from "@/interface/home";
+//  获取文章列表
+let articleListObj: ArticleRes = reactive({
+  pageCount: 0,
+  postList: [],
+});
+const getArticleLists = async () => {
+  const res = await getArticleList({});
+  if (res && res.data.code !== 200) return;
+  articleListObj.postList = res.data.data.postList;
+  console.log(articleListObj);
+};
+onMounted(() => {
+  getArticleLists();
 });
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 .box-card {
   width: 100%;
 }
