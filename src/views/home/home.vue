@@ -43,7 +43,12 @@ export default defineComponent({
       if (!getToken()) return;
       store.dispatch(`loginInfo/${Types.SET_LOGIN_INFO}`, true);
       // 请求个人信息数据
-      store.dispatch(`personalInfo/${Types.SET_PERSONAL_INFO}`);
+      // store.dispatch(`personalInfo/${Types.SET_PERSONAL_INFO}`);
+      JSON.parse(localStorage.getItem("personalInfo") as any).AvatarUrl &&
+        store.commit(
+          `personalInfo/${Types.SET_PERSONAL_INFO}`,
+          JSON.parse(localStorage.getItem("personalInfo") as any)
+        );
     });
     return {
       isShowLogin,

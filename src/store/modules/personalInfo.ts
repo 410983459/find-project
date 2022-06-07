@@ -29,6 +29,7 @@ export const personalInfo: Module<PersonalInfo, RootState> = {
     mutations: {
         [Types.SET_PERSONAL_INFO](state, info: UserInfoItem) {
             state.personalInfo = info
+            localStorage.setItem('personalInfo',JSON.stringify(info))
         }
     },
     actions: {

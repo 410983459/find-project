@@ -11,14 +11,14 @@
     <el-col :span="24">
       <el-card class="box-card pa-0">
         <el-menu
-          :default-active="0"
+          default-active="0"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
         >
-          <el-menu-item :index="0"> 全部 </el-menu-item>
+          <el-menu-item index="0"> 全部 </el-menu-item>
           <el-menu-item
-            :index="index + 1"
+            :index="index + 1+''"
             v-for="(item, index) in CategoriesList"
             :key="item.id"
           >
